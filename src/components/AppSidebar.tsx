@@ -1,0 +1,67 @@
+
+import { Link, useLocation } from "react-router-dom";
+import { Search, Zap, History, MessageSquare, Settings, User, ShoppingBag } from "lucide-react";
+import { cn } from "@/lib/utils";
+import Icon from "./ui/icon";
+
+const AppSidebar = () => {
+  const location = useLocation();
+  const isActive = (path: string) => location.pathname === path;
+
+  const menuItems = [
+    { icon: "Search", label: "Поиск", path: "/" },
+    { icon: "Zap", label: "IP Logger", path: "/logger" },
+    { icon: "History", label: "Библиотека", path: "/library" },
+    { icon: "Settings", label: "Настройки", path: "/settings" },
+    { icon: "User", label: "Аккаунт", path: "/account" },
+    { icon: "ShoppingBag", label: "Покупки", path: "/purchase" },
+  ];
+
+  return (
+    <div className="w-64 bg-sidebar text-sidebar-foreground border-r border-sidebar-border flex flex-col">
+      {/* Logo */}
+      <div className="p-4 border-b border-sidebar-border flex items-center gap-3">
+        <div className="h-10 w-10 bg-accent rounded-md flex items-center justify-center font-bold text-white">
+          РС
+        </div>
+        <span className="text-xl font-semibold">Rassvet</span>
+      </div>
+      
+      {/* Search */}
+      <div className="p-4">
+        <div className="flex items-center gap-2 bg-background/10 rounded-md px-3 py-2 text-sidebar-foreground/70">
+          <Icon name="Search" size={18} />
+          <input 
+            type="text" 
+            placeholder="Поиск" 
+            className="bg-transparent border-none outline-none w-full placeholder:text-sidebar-foreground/50"
+          />
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="mt-2 flex-1">
+        <ul className="space-y-1 px-2">
+          {menuItems.map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                className={cn(
+                  "flex items-center gap-3 rounded-md px-3 py-2 transition-colors",
+                  isActive(item.path)
+                    ? "bg-accent/20 text-accent"
+                    : "text-sidebar-foreground hover:bg-accent/10"
+                )}
+              >
+                <Icon name={item.icon} size={18} />
+                <span>{item.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  );
+};
+
+export default AppSidebar;

@@ -1,20 +1,9 @@
 
-import { fileURLToPath } from "url";
-import { dirname, resolve } from "path";
-import type { Config } from "tailwindcss";
+import { type Config } from "tailwindcss";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const config: Config = {
+export default {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
-  prefix: "",
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     container: {
       center: true,
@@ -61,15 +50,11 @@ const config: Config = {
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           border: "hsl(var(--sidebar-border))",
-          accent: {
-            DEFAULT: "hsl(var(--sidebar-accent))",
-            foreground: "hsl(var(--sidebar-accent-foreground))",
-          },
-          primary: {
-            DEFAULT: "hsl(var(--sidebar-primary))",
-            foreground: "hsl(var(--sidebar-primary-foreground))",
-          },
           ring: "hsl(var(--sidebar-ring))",
         },
       },
@@ -94,7 +79,5 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-};
-
-export default config;
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+} satisfies Config;

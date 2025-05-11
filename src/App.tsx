@@ -10,6 +10,7 @@ import Logger from "./pages/Logger";
 import Library from "./pages/Library";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,8 @@ const App = () => (
             <Route path="logger" element={<Logger />} />
             <Route path="library" element={<Library />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="account" element={<NotFound />} />
+            <Route path="purchase" element={<NotFound />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
